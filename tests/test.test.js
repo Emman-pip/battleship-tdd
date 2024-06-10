@@ -47,8 +47,45 @@ describe("#Ship factory", () => {
   // it("coordinate matches length", () => {});
 });
 
-// describe("#Gameboard", () => {
-//   it("Gameboard exists.", () => {
-//     expect(Gameboard).not.toBeUndefined();
-//   });
-// });
+describe("#Gameboard", () => {
+  it("Gameboard exists.", () => {
+    expect(Gameboard).not.toBeUndefined();
+  });
+  const g = new Gameboard(
+    Ship([
+      ["a", 1],
+      ["b", 1],
+    ]),
+  );
+  it("receive attack (hit)", () => {
+    expect(g.receiveAttack(["a", 1])).toBeTruthy();
+    expect(g.receiveAttack(["b", 1])).toBeTruthy();
+  });
+  it("receive attack (miss)", () => {
+    expect(g.receiveAttack(["c", 1])).toBeFalsy();
+    expect(g.receiveAttack(["t", 1])).toBeFalsy();
+  });
+  it("receive attack (already done)", () => {
+    expect(g.receiveAttack(["a", 1])).toBeNull();
+    expect(g.receiveAttack(["b", 1])).toBeNull();
+  });
+  it("missed attacks", () => {
+    expect(g.misses.toString()).toMatch(
+      [
+        ["c", 1],
+        ["t", 1],
+      ].toString(),
+    );
+  });
+  it("hit attacks", () => {
+    expect(g.hits.toString()).toMatch(
+      [
+        ["a", 1],
+        ["b", 1],
+      ].toString(),
+    );
+  });
+  it("all sunk", () => {
+    expect(g.allSunk()).toBeTruthy();
+  });
+});
