@@ -1,6 +1,6 @@
-const Ship = (len) => {
+const Ship = (arr) => {
   return {
-    len: len,
+    len: arr.length,
     hit: 0,
     isSunk: this.len == this.hit ? true : false,
   };
