@@ -1,11 +1,8 @@
 const Ship = (len) => {
-  const length = len;
   return {
-    getLength: () => length,
-    hits: 0,
-    isSunk: () => {
-      return hit === length ? true : false;
-    },
+    len: len,
+    hit: 0,
+    isSunk: this.len == this.hit ? true : false,
   };
 };
 
